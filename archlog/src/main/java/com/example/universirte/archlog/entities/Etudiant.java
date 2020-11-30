@@ -1,9 +1,16 @@
 package com.example.universirte.archlog.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
 public class Etudiant implements Serializable {
     @Id
@@ -19,6 +26,8 @@ public class Etudiant implements Serializable {
         this.prenomETU = prenomETU;
         this.adresseETU = adresseETU;
         this.dateentree = dateentree;
+    }
+    public Etudiant(){
     }
 
     @ManyToMany(mappedBy = "etudiants")

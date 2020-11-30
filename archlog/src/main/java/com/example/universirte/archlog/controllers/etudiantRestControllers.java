@@ -7,9 +7,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/Etudiants")
+@RequestMapping(value="/Etudiants",method= {RequestMethod.GET})
 public class etudiantRestControllers {
     @Autowired
     etudiantInterface etudiantInterface;
@@ -21,6 +22,25 @@ public class etudiantRestControllers {
     @GetMapping("/all")
     public List<Etudiant> getAllEtudiant(){
         return etudiantInterface.ListEtudiant();
+    }
+    @GetMapping("/findEtudiant/{id}")
+    public Optional<Etudiant> findEtudiant(@PathVariable String id)
+    {
+        return etudiantInterface.findEtudiant(Long.parseLong(id));
+
+    }
+    @PutMapping("/UpdateEtudiant")
+    public String UpdateEtudiant(@PathVariable(value="id") Long medid,@Validated @RequestBody Etudiant etudiant1)
+    { etudiantInterface.UpdateEtudiant(etudiant1);
+
+        return"success:Update a ete bien faite";
+
+    }
+    @DeleteMapping(value="/deleteEtudiant/{id}")
+    public String deleteEtudiant(@PathVariable String id)
+    {
+        etudiantInterface.removeEtudiant(Long.parseLong(id));
+        return "ok!";
     }
 
 }
